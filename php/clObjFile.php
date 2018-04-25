@@ -25,7 +25,7 @@ class clObjFile {
   private function setError($errStr) {
     $this->error=$errStr;
 
-    echo '<hr />'. $errStr .'<hr />';
+    echo '<error>'. $errStr .'</error>'."\n";
     return false;
   }
 
@@ -410,22 +410,22 @@ class clObjFile {
     switch ($ob['_type'])
     {
       case 251:
-    	  $tmp .= $space .'[list count="'. $ob['count'] .'" pos="'. $ob['pos'] .'"';
+    	  $tmp .= $space .'<list count="'. $ob['count']; // .'" pos="'. $ob['pos'];
     
     	  if (count($ob['child'])==0)
     	  {
-    	    $tmp .= ' /]'. $nl;
+    	    $tmp .= ' />'. $nl;
     	  }
     	  else
     	  {
-    	    $tmp .= ']'. $nl;
+    	    $tmp .= '>'. $nl;
     
     	    foreach($ob['child'] as $cpos)
     	    {
     	      $tmp .= $this->getXML($cpos, $deep+1);
     	    }
     
-    	    $tmp .= $space .'[/list]'. $nl;
+    	    $tmp .= $space .'</list>'. $nl;
     	  }
     
     	  break;
@@ -433,35 +433,35 @@ class clObjFile {
     
     	case 254:
     
-    	  $tmp .= $space .'[object type="'. $this->getObjectNameById($ob['objtype']) .'" id="'. $ob['id'] .'" pos="'. $ob['pos'] .'"';
+    	  $tmp .= $space .'<object type="'. $this->getObjectNameById($ob['objtype']) .'" id="'. $ob['id'];// .'" pos="'. $ob['pos'] .'"';
     	  if ($ob['prop']!='') $tmp .= ' prop="#'. bin2hex($ob['prop']) .'"';
     
     
     	  if (count($ob['child'])==0)
     	  {
-    	    $tmp .= ' /]'. $nl;
+    	    $tmp .= ' />'. $nl;
     	  }
     	  else
     	  {
-    	    $tmp .= ']'. $nl;
+    	    $tmp .= '>'. $nl;
     
     	    foreach($ob['child'] as $cpos)
     	    {
     	      $tmp .= $this->getXML($cpos, $deep+1);
     	    }
     
-    	    $tmp .= $space .'[/object]'. $nl;
+    	    $tmp .= $space .'</object>'. $nl;
     	  }
     
     
     	  break;
     
     	case 1:
-    	  $tmp .= $space .'[prop type="'. $this->getPropertyNameById($ob['id']) .'" value="#'. bin2hex($ob['value']) .'" pos="'. $ob['pos'] .'" /]'. $nl;
+    	  $tmp .= $space .'<prop type="'. $this->getPropertyNameById($ob['id']) .'" value="#'. bin2hex($ob['value']) .'" />'. $nl; //'" pos="'. $ob['pos'] .
     	  break;
     
     	default:
-    	  $tmp .= $space .'[?? type='. $ob['_type'] .' ?? /]'. $nl;
+    	  $tmp .= $space .'<unknownprop type='. $ob['_type'] .' />'. $nl;
     }
 
 

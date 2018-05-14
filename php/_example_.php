@@ -11,8 +11,8 @@ function getgetVar($varname, $default='')
 include_once('clFile.php');
 include_once('cllabview.php');
 
-$filename_in = 'myFile.vi';
-$filename_out = 'out.vi';
+$filename_in = $argv[1];
+$filename_out = '';
 $newPassword = '123456';
 
 
@@ -42,7 +42,8 @@ if ($LV->readVI())
   //- does not work because too many errors when opening VI in Labview... but you can giv it a try
   //$LVSR->setVersion(8,6);
 
-
+  $BDHx = $LV->getBDHx();
+  $FPHx = $LV->getFPHx();
 
   //-- just debugging ----
   $VCTP = $LV->getVCTP();
@@ -58,13 +59,15 @@ if ($LV->readVI())
   echo '<pre>'. htmlentities($VERS->getXML()) .'</pre>';
   echo '<hr />';
   echo '<pre>'. htmlentities($LVSR->getXML()) .'</pre>';
+  echo '<pre>'. htmlentities($BDHx->getXML()) .'</pre>';
+  echo '<pre>'. htmlentities($FPHx->getXML()) .'</pre>';
   //-- end debugging ----
 
 
 
 
   //- save the .VI (this will calculate the password hash)
-  if (!$LV->store($filename_out))
+  if ($filename_out != "" && !$LV->store($filename_out))
   {
     echo '<b>Error: </b><pre>'. $LV->getErrorStr() .'</pre>';
   }

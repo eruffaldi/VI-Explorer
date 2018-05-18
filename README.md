@@ -26,3 +26,15 @@ Unsupported features: e.g our secret project files
 - [?? type=0 ?? /]
 - prop typ 570,72,111
 - solve string props for 1:text 570:unk 72:unk 203:BorderStyle 111:unk
+
+# ClassID Enums
+
+
+https://forums.ni.com/t5/LabVIEW/Complete-list-of-class-IDs-and-names/td-p/2504572/page/2
+ClassID_Enum.ctl Post ‎06-17-2015 04:50 PM
+
+# Handling CTL files
+
+1) HeadIdentifier3 is LVCC instead of LVIN
+2) minimal block diagram: object types 126 & 27
+3) front panel has many things and in particular property 46

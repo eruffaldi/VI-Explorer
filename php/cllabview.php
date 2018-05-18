@@ -80,10 +80,10 @@ class clLabView
     
       if ($this->m_FileHead['HeadIdentifier1'] != "RSRC\r\n")    return $this->m_error->addError('Wrong File Format: missing HeadIdentifier1: RSRC');
       if ($this->m_FileHead['HeadIdentifier3'] == 'LVAR')        return $this->m_error->addError('This program does not support .lvlib / LabView-LIB-files : wrong value for HeadIdentifier3: LVAR');
-      if ($this->m_FileHead['HeadIdentifier3'] != 'LVIN')        return $this->m_error->addError('Wrong File Format: missing HeadIdentifier3: LVIN');
+      if ($this->m_FileHead['HeadIdentifier3'] != 'LVIN' && $this->m_FileHead['HeadIdentifier3'] != 'LVCC')        return $this->m_error->addError('Wrong File Format: missing HeadIdentifier3: LVIN or LVCC got ' . $this->m_FileHead['HeadIdentifier3']);
       if ($this->m_FileHead['HeadIdentifier4'] != 'LBVW')        return $this->m_error->addError('Wrong File Format: missing HeadIdentifier4: LBVW');
 
-    
+        
       $this->m_FileHead['RSRCOffset'] = $FReader->readInt(4);
       $this->m_FileHead['RSRCSize'] = $FReader->readInt(4);
 
